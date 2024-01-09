@@ -1,6 +1,6 @@
 import { writable } from 'svelte/store';
 import { hierarchy, partition } from 'd3';
-import flareData from "./flare.json";
+import flareData from "./antibiotics.json";
 
 let nodeId = 0; // Initialize a counter for node IDs
 

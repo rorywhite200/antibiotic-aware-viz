@@ -6,7 +6,7 @@
     import SunburstNode from './SunburstNode.svelte'; 
     import Label from './Label.svelte';
     import { rootStore } from '../stores/rootStore.js';
-    import flare from '../stores/flare.json';
+    import antibiotics from '../stores/antibiotics.json';
     
     let width = 1000;
     let height = 1000;
@@ -14,7 +14,7 @@
     $: hoveredItem = null;
 
     $: radius = width / 6;
-   let color = scaleOrdinal(quantize(interpolateWarm, flare.children.length + 1));
+   let color = scaleOrdinal(quantize(interpolateWarm, antibiotics.children.length + 1));
 
     let lastClickedNodeId = 0
 
@@ -61,14 +61,28 @@
 
     function getColor(d) {
         let node = d;
-        if (node.data.name == "Access" || node.parent.data.name == "Access") return "#808000";
-        if (node.data.name == "Watch" || node.parent.data.name == "Watch") return "#DAA520";
-        if (node.data.name == "Reserve" || node.parent.data.name == "Reserve") return "#A52A2A";
+        if (node.data.name == "Access" || node.parent.data.name == "Access") return "#32965D";
+        if (node.data.name == "Watch" || node.parent.data.name == "Watch") return "#E0BE36";
+        if (node.data.name == "Reserve" || node.parent.data.name == "Reserve") return "#D52941";
 
         while (node.depth > 1) node = node.parent;
-        if (node.data.name == "Beta-Lactams") return "#D2B48C"
-        if (node.data.name == "Other") return "#BC8F8F"
+        if (node.data.name == "Beta-Lactams") return "#8491A3"
+        if (node.data.name == "Other") return "#DAD2D8"
         
+    }
+
+    function getFillOpacity(d) {
+
+        if (!arcVisible(d.current)) {
+            return 0;
+        } else if (d.depth == 1) {
+            return 0.8
+        } else if (d.depth == 2) {
+            return 0.6
+        } else if (!d.children) {
+            return 0.4
+        } else 
+            return 0.6;
     }
 
     function findTopLevelParent(node) {
@@ -89,7 +103,7 @@
         if (d.children) {
             hoveredItem = null;
         } else {
-            hoveredItem = d.data.name;
+            hoveredItem = d;
         }
     }
 
@@ -106,7 +120,7 @@
         d = {d}
         handleHover = {handleHover}
         arc_d3 = {arc_d3}
-        fill_opacity={arcVisible(d.current) ? (d.children ? 0.6 : 0.4) : 0}
+        fill_opacity= {getFillOpacity(d)}
         pointer_events={arcVisible(d.current) ? "auto" : "none"}
         handleClick={handleClick}
         >
@@ -130,19 +144,19 @@
     />
 
     {#if !hoveredItem}
-    <text text-anchor="middle" font-size="40" dominant-baseline="middle" pointer-events="none">
+    <text text-anchor="middle" dominant-baseline="middle" pointer-events="none">
         {lastClickedNode.data.name}
     </text>
     
     {#if lastClickedNode.depth > 0}
-    <text class="small-text" text-anchor="lower" font-size="18" dominant-baseline="middle" pointer-events="none" y="40">
+    <text class="small-text" text-anchor="lower" font-size="19" dominant-baseline="middle" pointer-events="none" y="40">
         ⏎  {getPath(lastClickedNode)}
     </text>
     {/if}
     {/if}
     {#if hoveredItem}
-    <text text-anchor="middle" font-size="30" dominant-baseline="middle" pointer-events="none">
-        {hoveredItem}
+    <text class= "hover-text" text-anchor="middle" font-size="30" dominant-baseline="middle" pointer-events="none">
+        {hoveredItem.data.name}
     </text>
     {/if}
 
@@ -152,10 +166,10 @@
 <style>
 
     svg {
-        font-size: 22px;
-        font-family: "alternate-gothic-condensed-a", sans-serif;
-        font-weight: 400;
-        fill: rgb(69, 68, 68);
+        font-size: 20px;
+        font-family: "lorimer-no-2", sans-serif;
+    font-weight: 300;
+        fill: rgb(68, 68, 68);
    -webkit-user-select: none;
    -moz-user-select: none;
    -ms-user-select: none;
@@ -167,11 +181,20 @@ text {
     font-family: "alternate-gothic-condensed-a", sans-serif;
     font-weight: 500;
     text-anchor: middle;
-    fill: rgb(69, 68, 68);
+    font-size: 35px;
+
+    fill: #525252
 }
 
 .small-text {
-    fill: rgb(65, 65, 65);
+    font-family: "lorimer-no-2", sans-serif;
+    fill: rgb(131, 131, 131);
+    font-weight: 300;
+    font-size: 20px;
+}
+
+.hover-text {
+    font-size: 35px;
 }
 
 </style>

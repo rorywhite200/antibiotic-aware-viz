@@ -49,6 +49,6 @@
 
 <style>
     path {
-        transition: fill-opacity 700ms;
+        transition: fill-opacity 500ms;
     }
 </style>
