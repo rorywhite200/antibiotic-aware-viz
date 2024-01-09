@@ -1,0 +1,267 @@
+{
+    "name": "Antibiotics",
+    "children": [
+      
+      {
+        "name": "Protein Synthesis",
+        "children": [
+          {
+            "name": "Macrolides",
+            "children": [
+              { "name": "Erythromycin", "value": 1003, "id": 10 },
+              { "name": "Azithromycin", "value": 1003, "id": 11 },
+              { "name": "Clarithromycin", "value": 1003, "id": 12 },
+                { "name": "Telithromycin", "value": 1003, "id": 13 },
+                { "name": "Spiramycin", "value": 1003, "id": 14 },
+                { "name": "Roxithromycin", "value": 1003, "id": 16 },
+                { "name": "Fidaxomicin", "value": 1003, "id": 16 }
+            ],
+            "id": 13
+          },
+          {
+            "name": "Tetracyclines",
+            "children": [
+              { "name": "Doxycycline", "value": 1003, "id": 14 },
+              { "name": "Tetracycline", "value": 1003, "id": 15 },
+              { "name": "Minocycline", "value": 1003, "id": 16 },
+                { "name": "Oxytetracycline", "value": 1003, "id": 18 },
+                { "name": "Demeclocycline", "value": 1003, "id": 19 },
+                { "name": "Metacycline", "value": 1003, "id": 21 }
+            ],
+            "id": 17
+          },
+            {
+                "name": "Aminoglycosides",
+                "children": [
+                { "name": "Gentamicin", "value": 1003, "id": 17 },
+                { "name": "Streptomycin", "value": 1003, "id": 18 },
+                { "name": "Tobramycin", "value": 1003, "id": 19 },
+                { "name": "Amikacin", "value": 1003, "id": 20 },
+                { "name": "Neomycin", "value": 1003, "id": 21 },
+                { "name": "Kanamycin", "value": 1003, "id": 22 },
+                { "name": "Paromomycin", "value": 1003, "id": 23 },
+                { "name": "Spectinomycin", "value": 1003, "id": 25 },
+                { "name": "Netilmicin", "value": 1003, "id": 25 }
+                ],
+                "id": 20
+            },
+            {
+                "name": "Lincosamides",
+                "children": [
+                { "name": "Clindamycin", "value": 1003, "id": 21 },
+                { "name": "Lincomycin", "value": 1003, "id": 22 }
+                ],
+                "id": 22
+            },
+            {
+                "name": "Oxazolidinones",
+                "children": [
+                { "name": "Linezolid", "value": 1003, "id": 23 },
+                { "name": "Tedizolid", "value": 1003, "id": 24 },
+                { "name": "Radezolid", "value": 1003, "id": 25 },
+                { "name": "Posizolid", "value": 1003, "id": 26 }
+                ],
+                "id": 24
+            },
+            {
+                "name": "Glycylcyclines",
+                "children": [
+                { "name": "Tigecycline", "value": 1003, "id": 25 }
+
+                ],
+                "id": 26
+            }
+
+
+        ],
+        "id": 27      },
+      {
+        "name": "Nucleic Acid Synthesis",
+        "children": [
+          {
+            "name": "Quinolones",
+            "children": [
+              { "name": "Ciprofloxacin", "value": 1003, "id": 28 },
+              { "name": "Levofloxacin", "value": 1003, "id": 29 }
+            ],
+            "id": 30
+          },
+          {
+            "name": "Fluoroquinolones",
+            "children": [
+              { "name": "Moxifloxacin", "value": 1003, "id": 31 },
+              { "name": "Gemifloxacin", "value": 1003, "id": 32 },
+                { "name": "Ofloxacin", "value": 1003, "id": 33 },
+                { "name": "Norfloxacin", "value": 1003, "id": 34 },
+                { "name": "Enoxacin", "value": 1003, "id": 35 },
+                { "name": "Lomefloxacin", "value": 1003, "id": 36 },
+                { "name": "Gatifloxacin", "value": 1003, "id": 38 },
+                { "name": "Nadifloxacin", "value": 1003, "id": 38 },
+                { "name": "Nalidixic acid", "value": 1003, "id": 38 }
+            ],
+            "id": 31
+          },
+            {
+                "name": "Rifamycins",
+                "children": [
+                { "name": "Rifampicin", "value": 1003, "id": 33 },
+                { "name": "Rifabutin", "value": 1003, "id": 34 },
+                { "name": "Rifaximin", "value": 1003, "id": 35 }
+                ],
+                "id": 36
+            },
+        
+            {
+                "name": "Nitroimidazoles",
+                "children": [
+                { "name": "Metronidazole", "value": 1003, "id": 43 }
+                ],
+                "id": 44
+            }
+        ],
+        "id": 31
+      },
+      {
+        "name": "Cell Wall Synthesis",
+        "children": [
+
+            {
+                "name": "Beta-Lactams",
+                "children": [
+                  {
+                    "name": "Penicillins",
+                    "children": [
+                      { "name": "Penicillin G", "value": 1003, "id": 1 },
+                      { "name": "Amoxicillin", "value": 1003, "id": 2 },
+                      { "name": "Ampicillin", "value": 1003, "id": 3 }
+                    ],
+                    "id": 4
+                  },
+                  {
+                    "name": "Cephalosporins",
+                    "children": [
+                      { "name": "Cefalexin", "value": 1003, "id": 5 },
+                      { "name": "Cefuroxime", "value": 1003, "id": 6 },
+                      { "name": "Ceftriaxone", "value": 1003, "id": 7 }
+                    ],
+                    "id": 8
+                  },
+                    {
+                        "name": "Carbapenems",
+                        "children": [
+                        { "name": "Imipenem", "value": 1003, "id": 9 },
+                        { "name": "Meropenem", "value": 1003, "id": 10 },
+                        { "name": "Ertapenem", "value": 1003, "id": 11 }
+                        ],
+                        "id": 12
+                    },
+                    {
+                        "name": "Monobactams",
+                        "children": [
+                        { "name": "Aztreonam", "value": 1003, "id": 13 }
+                        ],
+                        "id": 14
+                    },
+                    {
+                        "name": "Cephamycins",
+                        "children": [
+                        { "name": "Cefoxitin", "value": 1003, "id": 15 }
+                        ],
+                        "id": 100023
+                    }
+        
+                ],
+                "id": 9
+              },
+
+              {
+                "name": "Non-Beta-Lactams",
+                "children": [
+
+
+          {
+            "name": "Glycopeptides",
+            "children": [
+              { "name": "Vancomycin", "value": 1003, "id": 32 },
+              { "name": "Teicoplanin", "value": 1003, "id": 33 }
+            ],
+            "id": 34
+          },
+          {
+            "name": "Polypeptides",
+            "children": [
+              { "name": "Bacitracin", "value": 1003, "id": 35 }
+            ],
+            "id": 36
+          },
+          {
+            "name": "Phosphonic acids",
+            "children": [
+              { "name": "Fosfomycin", "value": 1003, "id": 37 }
+            ]
+          },
+            {
+                "name": "Lipoglycopeptides",
+                "children": [
+                { "name": "Telavancin", "value": 1003, "id": 38 },
+                { "name": "Oritavancin", "value": 1003, "id": 39 },
+                { "name": "Dalbavancin", "value": 1003, "id": 40 }
+                ],
+                "id": 41
+            }
+          
+        ],
+        "id": 300
+    }
+    ]
+
+      },
+      
+
+      {
+        "name": "Metabolic Pathway",
+        "children": [
+          {
+            "name": "Sulfonamides",
+            "children": [
+              { "name": "Sulfamethoxazole", "value": 1003, "id": 38 },
+              { "name": "Sulfadiazine", "value": 1003, "id": 39 }
+            ],
+            "id": 40
+          },
+          {
+            "name": "Dihydrofolate Reductase",
+            "children": [
+              { "name": "Trimethoprim", "value": 1003, "id": 41 }
+            ],
+            "id": 42
+          }
+        ],
+        "id": 45
+      },
+
+      {
+        "name": "Cell Membrane Integrity",
+        "children": [
+          {
+            "name": "Polymyxins",
+            "children": [
+              { "name": "Colistin", "value": 1003, "id": 32332 },
+              { "name": "Polymyxin B", "value": 1003, "id": 211 }
+            ],
+            "id": 2212
+          },
+          {
+            "name": "Lipopeptides",
+            "children": [
+              { "name": "Daptomycin", "value": 1003, "id": 44447 }
+            ],
+            "id": 3322
+          }
+        ],
+        "id": 33232332
+      }
+
+
+    ], "id": 0
+  }
