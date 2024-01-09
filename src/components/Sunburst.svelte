@@ -130,12 +130,12 @@
     />
 
     {#if !hoveredItem}
-    <text text-anchor="middle" font-size="35" dominant-baseline="middle" pointer-events="none">
+    <text text-anchor="middle" font-size="40" dominant-baseline="middle" pointer-events="none">
         {lastClickedNode.data.name}
     </text>
     
     {#if lastClickedNode.depth > 0}
-    <text text-anchor="lower" font-size="14" dominant-baseline="middle" pointer-events="none" y="40">
+    <text class="small-text" text-anchor="lower" font-size="18" dominant-baseline="middle" pointer-events="none" y="40">
         ⏎  {getPath(lastClickedNode)}
     </text>
     {/if}
@@ -152,9 +152,9 @@
 <style>
 
     svg {
-        font-size: 20px;
-        font-family:  'DIN Condensed', sans-serif;
-        font-weight: 700;
+        font-size: 22px;
+        font-family: "alternate-gothic-condensed-a", sans-serif;
+        font-weight: 400;
         fill: rgb(69, 68, 68);
    -webkit-user-select: none;
    -moz-user-select: none;
@@ -164,9 +164,14 @@
 }
 
 text {
-    font-family: 'DIN Condensed', sans-serif;
+    font-family: "alternate-gothic-condensed-a", sans-serif;
+    font-weight: 500;
     text-anchor: middle;
     fill: rgb(69, 68, 68);
+}
+
+.small-text {
+    fill: rgb(65, 65, 65);
 }
 
 </style>
