@@ -66,7 +66,7 @@
         if (node.data.name == "Reserve" || node.parent.data.name == "Reserve") return "#D52941";
 
         while (node.depth > 1) node = node.parent;
-        if (node.data.name == "Beta-Lactams") return "#8491A3"
+        if (node.data.name == "Beta-Lactams") return "#EBEBEB"
         if (node.data.name == "Other") return "#DAD2D8"
         
     }
