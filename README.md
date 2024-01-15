@@ -12,7 +12,7 @@ This project brings this data to life through an interactive sunburst visualizat
 
 ## Creation
 
-I used Svelte and D3 for their powerful capabilities in creating dynamic data visualizations. The sunburst mechanics are adapted from Mick Bostock's Observable Zoomable Sunburst [chart](https://observablehq.com/@d3/zoomable-sunburst). I rewrote the visualization mechanics in Svelte's declarative style.
+I used Svelte and D3 for their powerful capabilities in creating dynamic data visualizations. The sunburst mechanics are adapted from Mick Bostock's Observable Zoomable Sunburst [chart](https://observablehq.com/@d3/zoomable-sunburst). I adapted the visualization mechanics to Svelte's declarative style.
 
 I used R to convert the dataset into a hierachical JSON format for visualization.
 
