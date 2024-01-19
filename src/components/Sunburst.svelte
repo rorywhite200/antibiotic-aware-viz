@@ -2,11 +2,10 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 
 <script>
-    import { scaleOrdinal, quantize, interpolateWarm, arc } from "d3";
+    import { arc } from "d3";
     import SunburstNode from './SunburstNode.svelte'; 
     import Label from './Label.svelte';
     import { rootStore } from '../stores/rootStore.js';
-    import antibiotics from '../stores/antibiotics.json';
     
     let width = 1000;
     let height = 1000;
@@ -14,7 +13,6 @@
     $: hoveredItem = null;
 
     $: radius = width / 6;
-   let color = scaleOrdinal(quantize(interpolateWarm, antibiotics.children.length + 1));
 
     let lastClickedNodeId = 0
 

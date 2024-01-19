@@ -5,6 +5,8 @@
 
   $: console.log($width, $height)
 
+  $: mobile = $width < 800;
+
   let text = "Web Annex C. WHO AWaRe (access, watch, reserve) classification of antibiotics for evaluation and monitoring of use, 2023. WHO; 2023."
 
 </script>
@@ -13,7 +15,7 @@
   bind:clientWidth={$width}
   bind:clientHeight={$height}
 >
-<div style="height: 97%; aspect-ratio:1;">
+<div style="height: 98%; max-width: 95vw; aspect-ratio:1;">
   <Sunburst />
 </div>
 
@@ -21,12 +23,13 @@
 <div class="citations">
   {text}
 </div>
-
+{#if !mobile}
 <div class="title">
 WHO AWaRe <br>Classification of Antibiotics
 <br>
 <p class="credit">Viz by Rory White</p>
 </div>
+{/if}
 
 
 </main>
