@@ -45,12 +45,22 @@ style="margin-top:{smallScreen ? '2rem' : '0px'};}"
 </div>
 
 <div style="right: {mobile ? "" : "5rem"}; top: {mobile ? "" : "1rem"}; bottom: {mobile ? "8%" : ""}; width: {mobile ? "60%" : "200px"}" class="search-div">
+  {#if !mobile}
   <input class="search-bar" list="antibiotics" type="text" placeholder="Search for an antibiotic" value={selectedAntibiotic} on:input={handleSelection}/>
-    <datalist id="antibiotics">
+  <datalist id="antibiotics">
+    {#each antibioticsList as antibiotic}
+      <option value={antibiotic} />
+    {/each}
+  </datalist>  
+  {/if}
+   {#if mobile}
+   <select class="search-bar">
       {#each antibioticsList as antibiotic}
-        <option value={antibiotic} />
+        <option value={antibiotic} on:input={handleSelection}>{antibiotic}</option>
       {/each}
-    </datalist>  
+</select>
+   {/if}
+  
 </div>
 
 <div class="citations">
