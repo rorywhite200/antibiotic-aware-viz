@@ -2,7 +2,7 @@
   import { width, height } from './stores/dimensions';
   import Sunburst from "./components/Sunburst.svelte";
   import {rootStore} from "./stores/rootStore.js";
-    import { select } from 'd3';
+  import { select } from 'd3';
 
 
   $: console.log($width, $height)
@@ -30,8 +30,9 @@
   })
 
   function handleSelection(event) {
-    console.log(event)
-    selectedAntibiotic = event.target.value;
+    if (antibioticsList && antibioticsList.includes(event.target.value)) {
+      selectedAntibiotic = event.target.value;
+    }
   }
     
 </script>
