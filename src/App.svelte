@@ -7,16 +7,19 @@
 
   $: mobile = $width < 800;
 
+  $: smallScreen = $width < 600;
+
   let text = "Web Annex C. WHO AWaRe (access, watch, reserve) classification of antibiotics for evaluation and monitoring of use, 2023. WHO; 2023."
 
 </script>
 
 <main
+style="margin-top:{smallScreen ? '2rem' : '0px'};}"
   bind:clientWidth={$width}
   bind:clientHeight={$height}
 >
 <div style="height: 98%; max-width: 95vw; aspect-ratio:1;">
-  <Sunburst />
+  <Sunburst smallScreen={smallScreen}/>
 </div>
 
 

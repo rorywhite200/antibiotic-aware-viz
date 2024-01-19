@@ -7,6 +7,7 @@
     export let title;
     export let d;
     export let radius;
+    export let fontSize;
 
     let x0 = tweened(d.current.x0, { duration: 700, easing: cubicInOut });
     let x1 = tweened(d.current.x1, { duration: 700, easing: cubicInOut });
@@ -29,7 +30,7 @@
 </script>
 
 
-<text dy={dy} fill-opacity={fill_opacity} transform={labelTransform($x0, $x1, $y0, $y1)}>
+<text dy={dy}  font-size={fontSize} fill-opacity={fill_opacity} transform={labelTransform($x0, $x1, $y0, $y1)}>
     {title}
 </text>
 

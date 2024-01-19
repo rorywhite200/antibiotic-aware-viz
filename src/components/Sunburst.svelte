@@ -7,6 +7,7 @@
     import Label from './Label.svelte';
     import { rootStore } from '../stores/rootStore.js';
     
+    export let smallScreen = false;
     let width = 1000;
     let height = 1000;
 
@@ -128,7 +129,7 @@
 
     <g pointer-events="none" text-anchor="middle" style="user-select: none">
         {#each $rootStore.descendants().slice(1) as d}
-        <Label dy="0.35em" radius={radius} fill_opacity={+labelVisible(d.current)} d={d} title={d.data.name}></Label>
+        <Label dy="0.35em" radius={radius} fontSize={smallScreen ? "29px" : "20px"} fill_opacity={+labelVisible(d.current)} d={d} title={d.data.name}></Label>
         {/each}
     </g>
 
@@ -142,18 +143,18 @@
     />
 
     {#if !hoveredItem}
-    <text text-anchor="middle" dominant-baseline="middle" pointer-events="none">
+    <text class="middle-text" text-anchor="middle" font-size={smallScreen ? "55px" : "35px"} dominant-baseline="middle" pointer-events="none">
         {lastClickedNode.data.name}
     </text>
     
     {#if lastClickedNode.depth > 0}
-    <text class="small-text" text-anchor="lower" font-size="19" dominant-baseline="middle" pointer-events="none" y="40">
+    <text class="small-text" text-anchor="lower" font-size={smallScreen ? "30px" : "20px"} dominant-baseline="middle" pointer-events="none" y="40">
         ⏎  {getPath(lastClickedNode)}
     </text>
     {/if}
     {/if}
     {#if hoveredItem}
-    <text class= "hover-text" text-anchor="middle" font-size="30" dominant-baseline="middle" pointer-events="none">
+    <text class= "hover-text" text-anchor="middle" font-size={smallScreen ? "50px" : "35px"} dominant-baseline="middle" pointer-events="none">
         {hoveredItem.data.name}
     </text>
     {/if}
@@ -175,11 +176,10 @@
    overflow: visible;
 }
 
-text {
+.middle-text {
     font-family: "alternate-gothic-condensed-a", sans-serif;
     font-weight: 500;
     text-anchor: middle;
-    font-size: 35px;
 
     fill: #525252
 }
@@ -188,11 +188,11 @@ text {
     font-family: "lorimer-no-2", sans-serif;
     fill: rgb(131, 131, 131);
     font-weight: 300;
-    font-size: 20px;
+    text-anchor: middle;
 }
 
 .hover-text {
-    font-size: 35px;
+    text-anchor: middle;
 }
 
 </style>
