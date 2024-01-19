@@ -30,6 +30,7 @@
   })
 
   function handleSelection(event) {
+    console.log(event)
     selectedAntibiotic = event.target.value;
   }
     
@@ -54,9 +55,9 @@ style="margin-top:{smallScreen ? '2rem' : '0px'};}"
   </datalist>  
   {/if}
    {#if mobile}
-   <select class="search-bar">
+   <select class="search-bar" on:input={handleSelection}>
       {#each antibioticsList as antibiotic}
-        <option value={antibiotic} on:input={handleSelection}>{antibiotic}</option>
+        <option value={antibiotic}>{antibiotic}</option>
       {/each}
 </select>
    {/if}
