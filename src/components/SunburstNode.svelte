@@ -43,6 +43,7 @@
                 pointer-events={pointer_events}
                 on:click={() => d.children && handleClick(d)}
                 on:mouseover={handleHover(d)}
+                on:mouseout={handleHover(null)}
             >
 </path>
 

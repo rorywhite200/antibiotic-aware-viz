@@ -8,6 +8,9 @@
     import { rootStore } from '../stores/rootStore.js';
     
     export let smallScreen = false;
+    export let selectedAntibiotic = null;
+    export let resetSelectedAntibiotic = null;
+
     let width = 1000;
     let height = 1000;
 
@@ -17,9 +20,21 @@
 
     let lastClickedNodeId = 0
 
-    $: lastClickedNode = $rootStore.descendants().find(d => d.id == lastClickedNodeId);
+    let lastClickedNode = $rootStore.descendants().find(d => d.id == lastClickedNodeId);
+
+    $: console.log("lastClickedNode", lastClickedNode)
 
    $rootStore.each(d => d.current = d);
+
+   $: prevSelectedAntibiotic = "";
+
+   $: if (selectedAntibiotic != null && selectedAntibiotic != prevSelectedAntibiotic) {
+    let selectedNode = $rootStore.descendants().find(d => d.data.name == selectedAntibiotic);
+    if (selectedNode && selectedNode.parent) {
+        handleClick(selectedNode.parent);
+    }
+    prevSelectedAntibiotic = selectedAntibiotic;
+    }
 
     console.log({...$rootStore})
     $: arc_d3 = arc()
@@ -40,9 +55,11 @@
 
     function handleClick(p) {
 
-        console.log("node", p)
-        console.log("lastClickedNode", p.id)
+        console.log("clicked node", p)
+
         lastClickedNodeId = p.id;
+        lastClickedNode = $rootStore.descendants().find(d => d.id == lastClickedNodeId)
+        console.log("id", lastClickedNodeId)
 
         rootStore.update(root => {
 
@@ -99,7 +116,10 @@
     }
 
     function handleHover(d) {
-        if (d.children) {
+        if (!d) {
+            hoveredItem = null;
+        } else if
+         (d.children) {
             hoveredItem = null;
         } else {
             hoveredItem = d;
@@ -119,7 +139,8 @@
         d = {d}
         handleHover = {handleHover}
         arc_d3 = {arc_d3}
-        fill_opacity= {getFillOpacity(d)}
+        fill_opacity= {selectedAntibiotic && d.data.name != selectedAntibiotic ? 0.1 
+        : selectedAntibiotic && d.data.name == selectedAntibiotic ? 0.7 : getFillOpacity(d)}
         pointer_events={arcVisible(d.current) ? "auto" : "none"}
         handleClick={handleClick}
         >
@@ -138,7 +159,10 @@
         fill = "white"
         pointer-events="auto"
         style="cursor: pointer;"
-        on:click={() => {handleClick(lastClickedNode.parent)}}
+        on:click={() => {
+            handleClick(lastClickedNode.parent)
+            resetSelectedAntibiotic()
+            }}
         on:mouseover={() => {hoveredItem = null}}
     />
 
