@@ -29,7 +29,7 @@
    $: if (selectedAntibiotic != null && selectedAntibiotic != prevSelectedAntibiotic) {
     let selectedNode = $rootStore.descendants().find(d => d.data.name == selectedAntibiotic);
     if (selectedNode && selectedNode.parent) {
-        handleClick(selectedNode.parent);
+        handleClick(selectedNode.parent, true);
     }
     prevSelectedAntibiotic = selectedAntibiotic;
     }
@@ -50,9 +50,9 @@
         return d.y1 <= 3 && d.y0 >= 1 && (d.y1 - d.y0) * (d.x1 - d.x0) > 0.01;
     }
 
-    function handleClick(p) {
+    function handleClick(p, synthetic = false) {
 
-        if (p.depth == lastClickedNode.depth) {
+        if (!synthetic && p.depth == lastClickedNode.depth) {
             return;
         }
 
