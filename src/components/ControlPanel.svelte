@@ -18,7 +18,7 @@
 
   </script>
   
-  <div class="left-panel" bind:clientHeight in:fade={{ duration: 300 }} style={panelStyle}>
+  <div class="left-panel" in:fade={{ duration: 300 }} style={panelStyle}>
 
     
     <img width={clientHeight/2} class="diagram" src="diagram.png" alt="Description" />
@@ -79,7 +79,7 @@
     </div>
     
     </div>
-    <div class ="credits" style="font-size: 0.9rem; background: #D6D6D6; position: absolute; bottom: 0; left: 0; padding: 0.1rem 3rem 2rem 3rem; color: #393030;">
+    <div class ="credits" style="width: 100vw; font-size: 0.9rem; background: #D6D6D6; position: {mediumScreen ? "relative" : "absolute"}; bottom: 0; left: 0; padding: 0.1rem 3rem 2rem 3rem; color: #393030;">
     <h2>Credits</h2>
     <p style="line-height: 1.5; padding-right: 0.5rem;">This website was created by Rory White using Svelte and d3/js. Data was sourced from the <a href="https://www.who.int/publications/i/item/WHO-MHP-HPS-EML-2023.04">WHO AWaRe Classification 2023.</a>
     Antibiotic descriptions are from the <a href="https://go.drugbank.com">Drugbank</a> database (Attribution-NonCommercial 4.0 International) and Wikipedia. Text descriptions of the WHO AWaRe categories are from the <a href="https://aware.essentialmeds.org/groups">AWaRe website.</a> The visualization mechanics were adapted from Mike Bostock's Zoomable Sunburst.</p> 
