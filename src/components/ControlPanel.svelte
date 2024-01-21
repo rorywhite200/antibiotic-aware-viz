@@ -133,8 +133,6 @@
     font-family: "vox", sans-serif;
   font-weight: 400;
   font-size: 1.8rem;
-  font-style: normal;
-  white-space: nowrap;
   }
     
   .badges-container {
