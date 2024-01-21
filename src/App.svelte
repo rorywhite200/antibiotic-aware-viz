@@ -1,144 +1,108 @@
 <script>
   import { width, height } from './stores/dimensions';
   import Sunburst from "./components/Sunburst.svelte";
+  import ControlPanel from "./components/ControlPanel.svelte";
   import {rootStore} from "./stores/rootStore.js";
-  import { select } from 'd3';
-
-
-  $: console.log($width, $height)
-
-  $: mobile = $width < 800;
 
   $: smallScreen = $width < 600;
-
+  $: mediumScreen = $width < 1000;
   $: selectedAntibiotic = null;
-
-  function resetSelectedAntibiotic() {
-    selectedAntibiotic = null;
-  }
-
-  let text = "Web Annex C. WHO AWaRe (access, watch, reserve) classification of antibiotics for evaluation and monitoring of use, 2023. WHO; 2023."
+  $: selectedAntibioticWHOStatus = null;
+  $: selectedAntibioticEssential = null;
 
 
-  let antibioticsList = [];
+  $: showMainPanel = false;
 
-  let antibiotics = $rootStore.each((d) => {
+  $: antibioticsList = [];
+
+  $: $rootStore.each((d) => {
     if (!d.children) {
       antibioticsList.push(d.data.name)
     }
     antibioticsList.sort()
   })
 
-  function handleSelection(event) {
-    if (antibioticsList && antibioticsList.includes(event.target.value)) {
-      selectedAntibiotic = event.target.value;
+  function handleSelection(input) {
+    let antibioticName;
+    if (input.target && antibioticsList.includes(input.target.value)) {
+      antibioticName = input.target.value;
+    } else if (antibioticsList.includes(input)) {
+      antibioticName = input;
+    } else {
+      antibioticName = null;
+    }
+    selectedAntibiotic = antibioticName;
+
+    if (selectedAntibiotic) {
+      selectedAntibioticWHOStatus = $rootStore.descendants().find(d => d.data.name == selectedAntibiotic).parent.data.name;
+
+      if ($rootStore.descendants().find(d => d.data.name == selectedAntibiotic).data.EML == "Yes") {
+        selectedAntibioticEssential = true;
+      } else {
+        selectedAntibioticEssential = false;
+      }
+    } else {
+      selectedAntibioticWHOStatus = null;
     }
   }
-    
+
+ function handleSVGclick() {
+    showMainPanel = !showMainPanel;
+ }
+
 </script>
 
 <main
-style="margin-top:{smallScreen ? '2rem' : '0px'};}"
   bind:clientWidth={$width}
   bind:clientHeight={$height}
 >
-<div style="height: 98%; max-width: 95vw; aspect-ratio:1;">
-  <Sunburst selectedAntibiotic={selectedAntibiotic} resetSelectedAntibiotic={resetSelectedAntibiotic} smallScreen={smallScreen}/>
+<div style="height: 95%; max-width: {mediumScreen ? "93vw": "50vw"}; aspect-ratio:1; padding-top: 0.5rem;">
+  <Sunburst handleSelection={handleSelection} selectedAntibiotic={selectedAntibiotic} smallScreen={smallScreen}/>
 </div>
 
-<div style="right: {mobile ? "" : "5rem"}; top: {mobile ? "" : "1rem"}; bottom: {mobile ? "8%" : ""}; width: {mobile ? "60%" : "200px"}" class="search-div">
-  {#if !mobile}
-  <input class="search-bar" list="antibiotics" type="text" placeholder="Search for an antibiotic" value={selectedAntibiotic} on:input={handleSelection}/>
-  <datalist id="antibiotics">
-    {#each antibioticsList as antibiotic}
-      <option value={antibiotic} />
-    {/each}
-  </datalist>  
+{#if mediumScreen}
+  <svg class={showMainPanel ? "menu-bars-svg rotated rotate" : "menu-bars-svg rotate"} on:click={handleSVGclick} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Pro 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) --><path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"/></svg>
   {/if}
-   {#if mobile}
-   <select class="search-bar" on:input={handleSelection}>
-      {#each antibioticsList as antibiotic}
-        <option value={antibiotic}>{antibiotic}</option>
-      {/each}
-</select>
-   {/if}
-  
-</div>
 
-<div class="citations">
-  {text}
-</div>
-{#if !mobile}
-<div class="title">
-WHO AWaRe <br>Classification of Antibiotics
-<br>
-<p class="credit">Viz by Rory White</p>
-</div>
-{/if}
-
-
+  {#if showMainPanel || !mediumScreen}
+  <ControlPanel selectedAntibioticEssential={selectedAntibioticEssential} antibioticsList={antibioticsList} handleSelection={handleSelection} selectedAntibiotic={selectedAntibiotic} selectedAntibioticWHOStatus={selectedAntibioticWHOStatus} mediumScreen={mediumScreen} smallScreen={smallScreen}/>
+  {/if}
 </main>
 <style>
+
+
   main {
-    width: 100vw;
+    display: flex;
     height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    font-family: "lorimer-no-2", sans-serif;
-  }
-
-  .credit {
-    font-size: 0.9rem;
-    font-family: "lorimer-no-2", sans-serif;
-    color: rgb(41, 38, 38);
-  }
-  .title {
-    font-family: "lorimer-no-2", sans-serif;
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-    font-size: 1.5rem;
-    padding: 0.5rem;
-    color: grey;
-    z-index: -1;
-  }
-
-  .search-div {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
+    padding-left: 4%;
+    margin: 0;
+    justify-content: space-between;
     align-items: center;
-    z-index: 1;
-    width: 200px;
-  }
-
-  .search-bar {
     font-family: "lorimer-no-2", sans-serif;
-    font-size: 20px;
-    width: 100%;
-    color: rgb(43, 44, 44);
-    padding: 0.5rem 1rem;
-    border-radius: 10px;
-    border: 1px solid rgb(88, 87, 87);
-    background-color: rgb(233, 233, 233);
+    overflow: hidden;
+    background-image: linear-gradient(315deg, #d5ddf8, #fff 57%);
   }
 
-  datalist#antibiotics {
-    max-height: 50px !important;
-  }
+  .menu-bars-svg {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 2rem;
+      height: 2rem;
+      margin: 1rem;
+      cursor: pointer;
+      z-index: 100;
+      fill: rgb(192, 192, 192);
+    }
 
-  .citations {
-    font-family: "lorimer-no-2", sans-serif;
-    position: absolute;
-    bottom: 1rem;
-    right: 1rem;
-    width: 150px;
-    font-size: 0.6rem;
-    padding: 0.5rem;
-    color: grey;
-    z-index: -1;
-  }
+    .rotate {
+  transform-origin: center; /* Adjust as needed */
+  transition: transform 0.2s ease; /* Smooth transition for rotation */
+}
+
+.rotated {
+  transform: rotate(90deg); /* Rotate 90 degrees; adjust angle as desired */
+}
 
 
 </style>

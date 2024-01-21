@@ -11,6 +11,7 @@
     export let pointer_events
     export let handleClick;
     export let handleHover;
+    export let handleSelection;
 
     let x0 = tweened(d.current.x0, { duration: 700, easing: cubicInOut });
     let x1 = tweened(d.current.x1, { duration: 700, easing: cubicInOut });
@@ -41,7 +42,12 @@
                 fill={color}
                 fill-opacity={fill_opacity}
                 pointer-events={pointer_events}
-                on:click={() => d.children && handleClick(d)}
+                on:click={() => {
+                    handleSelection(d.data.name)
+                    if (d.children) {
+                        handleClick(d)
+                    }
+                }}
                 on:mouseover={handleHover(d)}
                 on:mouseout={handleHover(null)}
             >

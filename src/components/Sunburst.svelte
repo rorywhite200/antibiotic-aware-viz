@@ -9,7 +9,7 @@
     
     export let smallScreen = false;
     export let selectedAntibiotic = null;
-    export let resetSelectedAntibiotic = null;
+    export let handleSelection = null;
 
     let width = 1000;
     let height = 1000;
@@ -21,8 +21,6 @@
     let lastClickedNodeId = 0
 
     let lastClickedNode = $rootStore.descendants().find(d => d.id == lastClickedNodeId);
-
-    $: console.log("lastClickedNode", lastClickedNode)
 
    $rootStore.each(d => d.current = d);
 
@@ -36,7 +34,6 @@
     prevSelectedAntibiotic = selectedAntibiotic;
     }
 
-    console.log({...$rootStore})
     $: arc_d3 = arc()
       .startAngle(d => d.x0)
       .endAngle(d => d.x1)
@@ -55,11 +52,12 @@
 
     function handleClick(p) {
 
-        console.log("clicked node", p)
+        if (p.depth == lastClickedNode.depth) {
+            return;
+        }
 
         lastClickedNodeId = p.id;
         lastClickedNode = $rootStore.descendants().find(d => d.id == lastClickedNodeId)
-        console.log("id", lastClickedNodeId)
 
         rootStore.update(root => {
 
@@ -143,6 +141,7 @@
         : selectedAntibiotic && d.data.name == selectedAntibiotic ? 0.7 : getFillOpacity(d)}
         pointer_events={arcVisible(d.current) ? "auto" : "none"}
         handleClick={handleClick}
+        handleSelection={handleSelection}
         >
         </SunburstNode>
         {/each}
@@ -160,8 +159,8 @@
         pointer-events="auto"
         style="cursor: pointer;"
         on:click={() => {
-            handleClick(lastClickedNode.parent)
-            resetSelectedAntibiotic()
+            lastClickedNode.parent ? handleClick(lastClickedNode.parent) : null
+            lastClickedNode.parent ? handleSelection(lastClickedNode.parent.data.name) : handleSelection(lastClickedNode.data.name)
             }}
         on:mouseover={() => {hoveredItem = null}}
     />
@@ -198,6 +197,7 @@
    -ms-user-select: none;
    user-select: none;
    overflow: visible;
+   pointer-events: none;
 }
 
 .middle-text {
