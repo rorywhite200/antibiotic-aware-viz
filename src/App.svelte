@@ -3,6 +3,7 @@
   import Sunburst from "./components/Sunburst.svelte";
   import ControlPanel from "./components/ControlPanel.svelte";
   import {rootStore} from "./stores/rootStore.js";
+  import { onMount } from 'svelte';
 
   $: smallScreen = $width < 600;
   $: mediumScreen = $width < 1000;
@@ -13,14 +14,16 @@
 
   $: showMainPanel = false;
 
-  $: antibioticsList = [];
+  let antibioticsList = [];
 
-  $: $rootStore.each((d) => {
-    if (!d.children) {
-      antibioticsList.push(d.data.name)
-    }
+  $rootStore.each((d) => {
+      if (!d.children) {
+        antibioticsList.push(d.data.name)
+      }
+    })
+  
     antibioticsList.sort()
-  })
+
 
   function handleSelection(input) {
     let antibioticName;
