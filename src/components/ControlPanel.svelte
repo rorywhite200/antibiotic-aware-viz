@@ -18,7 +18,7 @@
 
   </script>
   
-  <div class="left-panel" in:fade={{ duration: 300 }} style={panelStyle}>
+  <div bind:clientHeight class="left-panel" in:fade={{ duration: 300 }} style={panelStyle}>
 
     
     <img width={clientHeight/2} class="diagram" src="diagram.png" alt="Description" />
