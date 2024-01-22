@@ -79,9 +79,9 @@ unique_drug_info_dt$description <- if_else(unique_drug_info_dt$description == ""
 
 unique_drug_info_dt <- unique_drug_info_dt |> select(-generic_description)
 
-unique_drug_info_dt$description <- gsub("\\[.*?\\]", "", unique_drug_info_dt$description)
+unique_drug_info_dt$description <- gsub("\\[[A-Z0-9]+\\]", "", unique_drug_info_dt$description)
 
-unique_drug_info_dt$description <- gsub("\\_", " ", unique_drug_info_dt$description)
+unique_drug_info_dt$description <- gsub("<i>|</i>|\\[|\\]|\\_", "", unique_drug_info_dt$description)
 
 merged_df <- left_join(df, unique_drug_info_dt, by = "ATC_code")
 
